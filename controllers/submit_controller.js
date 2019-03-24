@@ -244,30 +244,7 @@ exports.front_link = function (req, res) {
 }
 
 
-// SUBMITING A SUBREDDIT
-exports.subreddit = function (req, res) {
-    Profile.update({
-            username: req.session.user
-        }, {
-            $push: {
-                owned: req.body.subreddit
-            }
-        },
-        function (err, doc) {
-            if (err) throw err;
 
-        }).then(function () {
-        Subreddit({
-            name: req.body.subreddit,
-            description: req.body.description
-        }).save(function (err, doc) {
-            if (err) throw err
-
-            console.log(`[Frontpage] ${req.body.subreddit} subreddit created`)
-            res.redirect(`/r/${req.body.subreddit}`);
-        });
-    });
-}
 
 // SEARCHING FOR A POST
 exports.front_search = function (req, res) {
